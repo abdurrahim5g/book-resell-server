@@ -10,6 +10,13 @@ const run = async () => {
     router.get("/", (req, res) => {
       res.send("All users");
     });
+
+    router.post("/", async (req, res) => {
+      const userDoc = req.body;
+      const result = await userCollection.insertOne(userDoc);
+      console.log(result);
+      res.status(200).send(result);
+    });
   } finally {
     // Finally
   }
