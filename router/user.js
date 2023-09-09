@@ -38,6 +38,16 @@ const run = async () => {
         })
         .catch((err) => console.log(err));
     });
+
+    /**
+     *
+     * Get user role
+     */
+    router.get(`/single-user`, async (req, res) => {
+      const query = req.query;
+      const result = await userCollection.findOne(query);
+      res.send(result);
+    });
   } finally {
     // Finally
   }
