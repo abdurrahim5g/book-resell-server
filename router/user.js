@@ -16,8 +16,10 @@ const run = async () => {
       return false;
     };
 
-    router.get("/", (req, res) => {
-      res.send("All users");
+    router.get("/", async (req, res) => {
+      const query = req.query;
+      const result = await userCollection.find(query).toArray();
+      res.send(result);
     });
 
     router.post("/", async (req, res) => {
