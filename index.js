@@ -29,12 +29,14 @@ app.use(express.json());
  * Import the routers
  */
 const useUser = require("./router/user");
+const useCatagory = require("./router/catagory");
 
 /**
  *
  * Make the API Using routers
  */
 app.use("/users", useUser);
+app.use("/catagory", useCatagory);
 
 // Base API for testing and checking the server is running
 app.get("/", (req, res) => res.send("Book resell server is running 🚀"));
