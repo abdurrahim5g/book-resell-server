@@ -8,7 +8,9 @@ const run = async () => {
     const catagoryCollection = db.collection("catagory");
 
     router.get("/", async (req, res) => {
-      res.send("All Catagory");
+      const query = req.query;
+      const result = await catagoryCollection.find(query).toArray();
+      res.send(result);
     });
 
     router.post("/", async (req, res) => {
