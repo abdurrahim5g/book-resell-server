@@ -30,6 +30,7 @@ app.use(express.json());
  */
 const useUser = require("./router/user");
 const useCatagory = require("./router/catagory");
+const useProduct = require("./router/products");
 
 /**
  *
@@ -37,6 +38,7 @@ const useCatagory = require("./router/catagory");
  */
 app.use("/users", useUser);
 app.use("/catagory", useCatagory);
+app.use("/product", useProduct);
 
 // Base API for testing and checking the server is running
 app.get("/", (req, res) => res.send("Book resell server is running 🚀"));
