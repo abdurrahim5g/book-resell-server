@@ -8,7 +8,12 @@ const run = async () => {
     const productCollection = db.collection("product");
 
     router.get("/", async (req, res) => {
-      res.send("ALl products");
+      const query = req.query;
+      const result = await productCollection
+        .find(query)
+        .sort({ time: -1 })
+        .toArray();
+      res.send(result);
     });
 
     router.post("/", async (req, res) => {
