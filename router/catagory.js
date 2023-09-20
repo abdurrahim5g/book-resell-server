@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../index");
+const { ObjectId } = require("mongodb");
 
 const run = async () => {
   try {
@@ -16,6 +17,14 @@ const run = async () => {
     router.post("/", async (req, res) => {
       const catagoryDoc = req.body;
       const result = await catagoryCollection.insertOne(catagoryDoc);
+      res.send(result);
+    });
+
+    router.delete("/", async (req, res) => {
+      const id = req.query?.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await catagoryCollection.deleteOne(query);
+      console.log(result);
       res.send(result);
     });
   } finally {
