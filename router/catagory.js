@@ -27,6 +27,17 @@ const run = async () => {
       console.log(result);
       res.send(result);
     });
+
+    // PATCH
+    router.patch("/", async (req, res) => {
+      const filter = { _id: new ObjectId(req.query.id) };
+      const updatedDoc = { $set: req.body };
+      const result = await catagoryCollection.updateOne(filter, updatedDoc, {
+        upsert: true,
+      });
+      // console.log(result);
+      res.send(result);
+    });
   } finally {
     //
   }
