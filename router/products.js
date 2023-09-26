@@ -7,8 +7,22 @@ const run = async () => {
     const db = client.db("bookresell");
     const productCollection = db.collection("product");
 
+    const slugToText = (slug) =>
+      slug
+        .toLowerCase()
+        .split(/[-_.\s]/)
+        .map((w) => `${w.charAt(0).toUpperCase()}${w.substr(1)}`)
+        .join(" ");
+
     router.get("/", async (req, res) => {
-      const query = req.query;
+      let query = {};
+      if (req.query?.catagory) {
+        query = { catagory: slugToText(req.query?.catagory) };
+      } else {
+        query = req.query;
+      }
+
+      console.log("Query", query);
       const result = await productCollection
         .find(query)
         .sort({ time: -1 })
